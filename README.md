@@ -8,7 +8,7 @@ First of all lets talk about the tools i got to use during my development:
 
 ## Tools
 * Python (Version 3.12.3)
-* SQL (I personally noramly use the administration platform postgreSQL/PgAdmin, but feel free to use the one you prefer such as MySQL Workbench)
+* SQL (I normaly use the administration platform postgreSQL/PgAdmin, but feel free to use the one you prefer such as MySQL Workbench)
 * Power BI (Mostly for the dashboard and insight presentation)
 
 ## Requirements (Necesary libraries to run the code)
