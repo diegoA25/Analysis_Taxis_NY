@@ -6,7 +6,8 @@ from generals import DATA_RANGE
 
 BASE_LINK = "https://d37ci6vzurychx.cloudfront.net/trip-data/"
 VEH_TYPE = "green_tripdata_"
-RAW_DATA_PATH = "/Analysis_Taxis_NY/files_dump/raw_data"
+RAW_DATA_PATH = "Analysis_Taxis_NY/files_dump/raw_data/"
+os.makedirs(RAW_DATA_PATH, exist_ok=True) # This creates the directory in case it doesn't already exist, if it does then it does nothing
 
 # logger configuration
 logger = logging.getLogger(__name__)

@@ -1,11 +1,13 @@
 # Data cleaning Script
-
+import os
 import pandas as pd
 from tqdm import tqdm
 from generals import DATA_RANGE
 
 RAW_DATA_PATH = "/Analysis_Taxis_NY/files_dump/raw_data/"
 CLEAN_DATA_PATH = "/Analysis_Taxis_NY/files_dump/clean_data/"
+os.makedirs(RAW_DATA_PATH, exist_ok=True)
+os.makedirs(CLEAN_DATA_PATH, exist_ok=True)
 VEH_TYPE = "green_tripdata_"
 
 # We will create a new column with only the date port of the tpep_pickup_datetime column
