@@ -33,6 +33,16 @@ def clean_data(df_: pd.DataFrame) -> pd.DataFrame: # The data frame to modify
             df_[col] = df_[col].astype('int64')
     return df_ # The data frame to modify
 
+# Function to remove rows with null or zero values
+def remove_null_and_zero_rows(df_: pd.DataFrame) -> pd.DataFrame:
+    df_ = df_.dropna(how='any') # Drop rows with null values
+
+    for col in df_.columns:
+        if df_[col].dtype in ['int64', 'float64']:
+            df_ = df_[df_[col] != 0]
+
+    return df_
+
 # Function to save a data frame to parquet file
 def save_clean_data(data_range_: list = DATA_RANGE) -> None: # Data frame to save
     for date in tqdm(data_range_):
@@ -41,6 +51,7 @@ def save_clean_data(data_range_: list = DATA_RANGE) -> None: # Data frame to sav
             f"{RAW_DATA_PATH}{file_name}"
         )
         df = clean_data(df)
+        df = remove_null_and_zero_rows(df)
         df.to_parquet(f"{CLEAN_DATA_PATH}{file_name}", index = False)
 
 if __name__ == "__name__":
