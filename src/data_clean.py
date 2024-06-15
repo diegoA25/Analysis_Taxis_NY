@@ -1,6 +1,7 @@
 # Data cleaning Script
 import pandas as pd
 from tqdm import tqdm
+import numpy as np
 from generals import DATA_RANGE
 
 RAW_DATA_PATH = "D:/Kodigo/Final Project DAJ/Analysis_Taxis_NY/files_dump/raw_data/"
@@ -34,11 +35,16 @@ def clean_data(df_: pd.DataFrame) -> pd.DataFrame: # The data frame to modify
 
 # Function to remove rows with null or zero values
 def remove_null_and_zero_rows(df_: pd.DataFrame) -> pd.DataFrame:
-    df_ = df_.dropna(how='any') # Drop rows with null values
+    # Replace null values with NaN
+    df_ = df_.replace([np.nan, None], np.nan)
 
+    # Drop rows with zero values
     for col in df_.columns:
         if df_[col].dtype in ['int64', 'float64']:
             df_ = df_[df_[col] != 0]
+
+    # Replace NaN values with null
+    df_ = df_.replace(np.nan, None)
 
     return df_
 

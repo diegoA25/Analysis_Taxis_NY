@@ -15,7 +15,7 @@ def upload_month(date_: str) -> None:  # This function is used to upload the dat
     df.to_sql(
         name = TABLE_NAME,
         con=CONN,
-        schema="NYT",
+        schema="nyt",
         if_exists="append",
         index=False
     )
@@ -30,7 +30,7 @@ def upload_month_chunks(date_: str, chunk_size_ = 10000) -> None:
         df_chunk.to_sql(
             name=TABLE_NAME,
             con=CONN,
-            schema="NYT",
+            schema="nyt",
             if_exists="append",
             index=False
         )
