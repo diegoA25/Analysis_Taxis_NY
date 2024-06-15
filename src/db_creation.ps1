@@ -23,6 +23,6 @@ $GRANT_PRIVILIGES = Read-Host "Would you like to grant writing and reading privi
 
 if ($GRANT_PRIVILIGES -eq "y"){
     $OTHER_USER = Read-Host "Please provide the name of the user you would grant priviliges:"
-    psql -U $USER -h $SERVER_ -p $PORT_ -d $DB_NAME -c "Grant all priviliges on database $DB_NAME to $OTHER_USER;"
-    psql -U $USER -h $SERVER_ -p $PORT_ -d $DB_NAME -c "Grant all priviliges on Schema $SCHEMA_NAME to $OTHER_USER;"
+    psql -U $USER -h $SERVER_ -p $PORT_ -d $DB_NAME -c "GRANT ALL PRIVILEGES ON DATABASE $DB_NAME to $OTHER_USER;"
+    psql -U $USER -h $SERVER_ -p $PORT_ -d $DB_NAME -c "GRANT ALL PRIVILEGES ON SCHEMA $SCHEMA_NAME to $OTHER_USER;"
 }
