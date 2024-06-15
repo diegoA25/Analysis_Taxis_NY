@@ -25,6 +25,10 @@ POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
 POSTGRES_PORT = os.getenv('POSTGRES_PORT')
 DB = "TaxiNY"
 
+print("POSTGRES_HOST:", POSTGRES_HOST)
+print("POSTGRES_USER:", POSTGRES_USER)
+print("POSTGRES_PORT:", POSTGRES_PORT)
+
 db_string = f"postgresql+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{DB}"
 CONN = create_engine(db_string)
 
@@ -45,5 +49,8 @@ DATA_RANGE = dates_q1_ant + dates_q1_last + dates_q1_act
 
 if __name__ == "__main__":
     test_query = "SELECT * FROM green.taxi_trips limit 1"
-    print(pd.read_sql(test_query, CONN))
-    
+    try:
+        df_test = pd.read_sql(test_query, CONN)
+        print(df_test)
+    except Exception as e:
+        print(f"Error connecting to the database: {e}")

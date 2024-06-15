@@ -1,11 +1,11 @@
-DROP TABLE IF EXISTS green.green_taxi_trips;
+DROP TABLE IF EXISTS nyt.green_taxi_trips;
 
-CREATE TABLE green.green_taxi_trips (
+CREATE TABLE nyt.green_taxi_trips (
     trip_id SERIAL PRIMARY KEY,
     VendorID SMALLINT NOT NULL,
-    tpep_pickup_datetime TIMESTAMP NOT NULL,
-    tpep_pickup_date DATE NOT NULL,
-    tpep_dropoff_datetime TIMESTAMP NOT NULL,
+    lpep_pickup_datetime TIMESTAMP NOT NULL,
+    lpep_pickup_date DATE NOT NULL,
+    lpep_dropoff_datetime TIMESTAMP NOT NULL,
     Passenger_count SMALLINT NULL,
     Trip_distance NUMERIC(8,2) NOT NULL,
     PULocationID SMALLINT NOT NULL,
@@ -24,4 +24,4 @@ CREATE TABLE green.green_taxi_trips (
     Airport_fee NUMERIC(4,2)
 );
 
-CREATE INDEX idx_tpep_pickup_date ON green.green_taxi_trips (tpep_pickup_date);
+CREATE INDEX idx_lpep_pickup_date ON nyt.green_taxi_trips (lpep_pickup_date);

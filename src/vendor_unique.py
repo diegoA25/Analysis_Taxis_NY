@@ -3,7 +3,7 @@ import pandas as pd
 from generals import CONN
 
 QUERY = """
-select vendorid, count(1) from tlc_ny.green.taxi_trips
+select vendorid, count(1) from nyt.green.taxi_trips
 group by vendor id
 """
 
