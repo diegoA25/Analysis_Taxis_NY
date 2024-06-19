@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS nyt.green_taxi_trips
     ehail_fee SMALLINT NULL,
     improvement_surcharge NUMERIC(3,2) NOT NULL,
     total_amount NUMERIC(8,2) NOT NULL,
-    payment_type SMALLINT NOT NULL,
-    trip_type SMALLINT NOT NULL,
+    payment_type SMALLINT,
+    trip_type SMALLINT,
     congestion_surcharge NUMERIC(5,2)
 );
 

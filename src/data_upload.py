@@ -4,10 +4,10 @@ import pandas as pd
 import os
 from tqdm import tqdm
 
-CLEAN_DATA_PATH = "Analysis_Taxis_NY/files_dump/clean_data/"
-os.makedirs(CLEAN_DATA_PATH, exist_ok=True) # We create the directory if it doesn't exist
+CLEAN_DATA_PATH = "D:/Kodigo/Final Project DAJ/Analysis_Taxis_NY/files_dump/clean_data/"
 VEH_TYPE = "green_tripdata_"
 TABLE_NAME = "green_taxi_trips"
+os.makedirs(CLEAN_DATA_PATH, exist_ok=True) # We create the directory if it doesn't exist
 
 
 def upload_month(date_: str) -> None:  # This function is used to upload the data for a specific month to the database
@@ -19,7 +19,7 @@ def upload_month(date_: str) -> None:  # This function is used to upload the dat
         name=TABLE_NAME,
         con=CONN,
         schema="nyt",
-        if_exists="replace",
+        if_exists="append",
         index=False
     )
 
@@ -35,7 +35,7 @@ def upload_month_chunks(date_: str, chunk_size_=10000) -> None:
             name=TABLE_NAME,
             con=CONN,
             schema="nyt",
-            if_exists="replace",
+            if_exists="append",
             index=False
         )
 

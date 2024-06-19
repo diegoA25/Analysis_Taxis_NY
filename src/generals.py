@@ -8,7 +8,7 @@ from sqlalchemy import create_engine
 import pandas as pd
 from dotenv import load_dotenv
 
-ENV_PATH = "D:\\Kodigo\\Final Project DAJ\\Analysis_Taxis_NY\\.env"
+ENV_PATH = ("D:\\Kodigo\\Final Project DAJ\\Analysis_Taxis_NY\\src\\.env")
 load_dotenv(ENV_PATH)
 
 def generate_dates(start_date_: str, end_date_: str) -> list:
@@ -21,19 +21,13 @@ def generate_dates(start_date_: str, end_date_: str) -> list:
     return date_list
 
 POSTGRES_HOST = os.getenv('POSTGRES_HOST')
-POSTGRES_USER = quote_plus(os.getenv('POSTGRES_USER'))
-POSTGRES_PASSWORD = quote_plus(os.getenv('POSTGRES_PASSWORD'))
+POSTGRES_USER = os.getenv('POSTGRES_USER')
+POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
 POSTGRES_PORT = os.getenv('POSTGRES_PORT')
 DB = quote_plus("TaxisNY")
 
-print("POSTGRES_HOST:", POSTGRES_HOST)
-print("POSTGRES_USER:", POSTGRES_USER)
-print("POSTGRES_PORT:", POSTGRES_PORT)
-
 db_string = f"postgresql+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{DB}"
 CONN = create_engine(db_string)
-
-print(db_string)
 
 START_DATE_Q1_ANT = "2020-01"
 END_DATE_Q1_ANT = "2020-03"

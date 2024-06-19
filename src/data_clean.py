@@ -5,14 +5,12 @@ import numpy as np
 from generals import DATA_RANGE
 
 RAW_DATA_PATH = "D:/Kodigo/Final Project DAJ/Analysis_Taxis_NY/files_dump/raw_data/"
-CLEAN_DATA_PATH = "D:\Kodigo\Final Project DAJ\Analysis_Taxis_NY\files_dump/clean_data/"
+CLEAN_DATA_PATH = "D:/Kodigo/Final Project DAJ/Analysis_Taxis_NY/files_dump/clean_data/"
 VEH_TYPE = "green_tripdata_"
 
 # We will create a new column with only the date port of the tpep_pickup_datetime column
 
 def create_data_col(df_: pd.DataFrame) -> pd.DataFrame: # The data frame to modify
-    if "lpep_pickup_datetime" not in df_.columns:
-        raise ValueError("The column 'lpep_pickup_datetime' is not in the DataFrame")
     df_["lpep_pickup_date"] = df_["lpep_pickup_datetime"].dt.date
     return df_ # returns the modified data frame
 
@@ -43,7 +41,7 @@ def save_clean_data(data_range_: list = DATA_RANGE) -> None:
             print(f"Columns in {file_name}: {df.columns.tolist()}")
 
             df = clean_data(df)
-            df.to_parquet(file_name, index=False) 
+            df.to_parquet(f"{CLEAN_DATA_PATH}{file_name}", index=False) 
             print(f"Data for {date} cleaned and saved successfully")
         except Exception as e:
             print(f"Error processing {file_name}: {e}")
