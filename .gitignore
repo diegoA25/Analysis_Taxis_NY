@@ -1,4 +1,4 @@
 test/
 *__pycache__/
 *files_dump/
-*/.env
+Analysis_Taxis_NY/.env
