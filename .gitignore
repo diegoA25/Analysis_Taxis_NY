@@ -2,3 +2,4 @@ test/
 *__pycache__/
 *files_dump/
 */.env
+*/.pylinctrc
