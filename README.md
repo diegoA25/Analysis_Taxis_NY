@@ -47,9 +47,16 @@ First of all lets talk about the tools i got to use during my development:
 ## Aditional Resources 
 https://github.com/DataTalksClub/data-engineering-zoomcamp
 
+## Data Dictionary (Green Taxi Trips Data Dictionary)
+https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_green.pdf
+
 ## Instructions of use 
 * After you clone the repository, you have to create using postgreSQL a localhost, with a super user, passsword and port, you will run the file db_creation.ps1 
 * Afterwards we got to run the generals file (both of them), keep in mind you have to create a .env file in which you will add the postgres host, user, password and port to use like so: "POSTGRES_HOST = localhost" and so on with the rest.
 * Then we got to download the data from the website provided so we run the file raw_data_download.
 * Afterwards we have to run the clean data script to get rid of all the unnecesary information we got from the download.
 * Finally we grab the data from the clean data directory created into your files dump and we procced to upload the data.
+* Once in pgAdmin we verify that the rows are actually created by simply counting the rows or showing the first 100 rows.
+* We proceed to create a ODBC connection between our new DB, so we can use it on power BI.
+* We create a new file on Power Bi, we select the option Obtain Data, we write ODBC and select that, we will be promptede with a drop down option panel, we select an instance that we created prior with Data origin ODBC, we used ODBC (16.0.0.0).
+* Then we transform our data if necesary and preapare the dashboards for our report.
