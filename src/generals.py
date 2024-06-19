@@ -1,6 +1,7 @@
 # General functions for the project
 
 import os
+from urllib.parse import quote_plus
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from sqlalchemy import create_engine
@@ -20,10 +21,10 @@ def generate_dates(start_date_: str, end_date_: str) -> list:
     return date_list
 
 POSTGRES_HOST = os.getenv('POSTGRES_HOST')
-POSTGRES_USER = os.getenv('POSTGRES_USER')
-POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
+POSTGRES_USER = quote_plus(os.getenv('POSTGRES_USER'))
+POSTGRES_PASSWORD = quote_plus(os.getenv('POSTGRES_PASSWORD'))
 POSTGRES_PORT = os.getenv('POSTGRES_PORT')
-DB = "TaxiNY"
+DB = quote_plus("TaxisNY")
 
 print("POSTGRES_HOST:", POSTGRES_HOST)
 print("POSTGRES_USER:", POSTGRES_USER)
@@ -31,6 +32,8 @@ print("POSTGRES_PORT:", POSTGRES_PORT)
 
 db_string = f"postgresql+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{DB}"
 CONN = create_engine(db_string)
+
+print(db_string)
 
 START_DATE_Q1_ANT = "2020-01"
 END_DATE_Q1_ANT = "2020-03"
@@ -48,9 +51,6 @@ dates_q1_act = generate_dates(START_DATE_Q1_ACT, END_DATE_Q1_ACT)
 DATA_RANGE = dates_q1_ant + dates_q1_last + dates_q1_act
 
 if __name__ == "__main__":
-    test_query = "SELECT * FROM green.taxi_trips limit 1"
-    try:
-        df_test = pd.read_sql(test_query, CONN)
-        print(df_test)
-    except Exception as e:
-        print(f"Error connecting to the database: {e}")
+    test_query = "SELECT * FROM nyt.green_taxi_trips limit 1"
+    df_test = pd.read_sql(test_query, CONN)
+    print(df_test)

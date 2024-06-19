@@ -9,32 +9,36 @@ os.makedirs(CLEAN_DATA_PATH, exist_ok=True) # We create the directory if it does
 VEH_TYPE = "green_tripdata_"
 TABLE_NAME = "green_taxi_trips"
 
-def upload_month(date_: str) -> None:  # This function is used to upload the data for  a specific month to the database
+
+def upload_month(date_: str) -> None:  # This function is used to upload the data for a specific month to the database
     file_name = f"{VEH_TYPE}{date_}.parquet"
-    df = pd.read_parquet(f"{CLEAN_DATA_PATH}{file_name}") 
+    file_path = f"{CLEAN_DATA_PATH}{file_name}"
+
+    df = pd.read_parquet(file_path)
     df.to_sql(
-        name = TABLE_NAME,
+        name=TABLE_NAME,
         con=CONN,
         schema="nyt",
-        if_exists="append",
+        if_exists="replace",
         index=False
     )
-    print(f"Data for {date_} uploaded successfully")
 
-def upload_month_chunks(date_: str, chunk_size_ = 10000) -> None:
+def upload_month_chunks(date_: str, chunk_size_=10000) -> None:
     file_name = f"{VEH_TYPE}{date_}.parquet"
-    df = pd.read_parquet(f"{CLEAN_DATA_PATH}{file_name}")
+    file_path = f"{CLEAN_DATA_PATH}{file_name}"
+
+    df = pd.read_parquet(file_path)
     total_rows = df.shape[0]
     for i in tqdm(range(0, total_rows, chunk_size_)):
-        df_chunk = df[i:i+chunk_size_] #Chunk Length
+        df_chunk = df[i:i+chunk_size_]  # Chunk Length
         df_chunk.to_sql(
             name=TABLE_NAME,
             con=CONN,
             schema="nyt",
-            if_exists="append",
+            if_exists="replace",
             index=False
         )
 
 if __name__ == "__main__":
     for date in tqdm(DATA_RANGE):
-        upload_month_chunks(date)
+        upload_month(date)
